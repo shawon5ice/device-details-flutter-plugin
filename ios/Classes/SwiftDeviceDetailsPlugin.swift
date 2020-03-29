@@ -1,7 +1,7 @@
 import Flutter
 import UIKit
-import <mach/mach.h>
-import <mach/mach_host.h>
+//import <mach/mach.h>
+//import <mach/mach_host.h>
 
 public class SwiftDeviceDetailsPlugin: NSObject, FlutterPlugin {
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -20,7 +20,7 @@ public class SwiftDeviceDetailsPlugin: NSObject, FlutterPlugin {
     iOSDeviceInfo["freeInternalStorage"] = getFreeDiskSpace()
     iOSDeviceInfo["screenSize"] = getDisplaySize()
     iOSDeviceInfo["totalRAMSize"] = humanReadableByteCount(ProcessInfo.processInfo.physicalMemory)
-    iOSDeviceInfo["freeRAMSize"] = humanReadableByteCount(ProcessInfo.processInfo.)
+//    iOSDeviceInfo["freeRAMSize"] = humanReadableByteCount(ProcessInfo.processInfo.)
     iOSDeviceInfo["screenSize"] = getDisplaySize()
   }
     result("iOS " + UIDevice.current.systemVersion)
@@ -69,26 +69,26 @@ public class SwiftDeviceDetailsPlugin: NSObject, FlutterPlugin {
                 }
     }
     
-    static func getFreeRAMSize() -> String? {
-       mach_port_t host_port;
-             mach_msg_type_number_t host_size;
-             vm_size_t pagesize;
-
-             host_port = mach_host_self();
-             host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
-             host_page_size(host_port, &pagesize);
-
-             vm_statistics_data_t vm_stat;
-
-             if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
-                 NSLog(@"Failed to fetch vm statistics");
-             }
-
-             /* Stats in bytes */
-             natural_t mem_free = vm_stat.free_count * pagesize;
-        return humanReadableByteCount(mem_free);
-        
-    }
+//    static func getFreeRAMSize() -> String? {
+//       mach_port_t host_port;
+//             mach_msg_type_number_t host_size;
+//             vm_size_t pagesize;
+//
+//             host_port = mach_host_self();
+//             host_size = sizeof(vm_statistics_data_t) / sizeof(integer_t);
+//             host_page_size(host_port, &pagesize);
+//
+//             vm_statistics_data_t vm_stat;
+//
+//             if (host_statistics(host_port, HOST_VM_INFO, (host_info_t)&vm_stat, &host_size) != KERN_SUCCESS) {
+//                 NSLog(@"Failed to fetch vm statistics");
+//             }
+//
+//             /* Stats in bytes */
+//             natural_t mem_free = vm_stat.free_count * pagesize;
+//        return humanReadableByteCount(mem_free);
+//        
+//    }
     
     static func getDisplaySize() -> String? {
         let scale = UIScreen.main.scale
