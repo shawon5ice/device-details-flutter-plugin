@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:device_details_plugin/device_details_plugin.dart';
@@ -10,24 +12,25 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _androidInfo = {};
+  var _deviceInfo = {};
 
   @override
   void initState() {
     super.initState();
-    _getAndroidInfo();
+    getDeviceInfo();
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
-  Future<void> _getAndroidInfo() async {
-    var androidInfo = await DeviceDetailsPlugin().getAndroidInfo();
-    print(androidInfo);
+  Future<void> getDeviceInfo() async {
+    var deviceInfo = Platform.isIOS ? await DeviceDetailsPlugin().getiOSInfo():
+    await DeviceDetailsPlugin().getAndroidInfo();
+    print(deviceInfo);
     // If the widget was removed from the tree while the asynchronous platform
     // message was in flight, we want to discard the reply rather than calling
     // setState to update our non-existent appearance.
     if (!mounted) return;
     setState(() {
-      _androidInfo = androidInfo;
+      _deviceInfo = deviceInfo;
     });
   }
 
@@ -38,26 +41,27 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: _androidInfo.isEmpty ? CircularProgressIndicator() : _showInfo()
+        body: _deviceInfo.isEmpty ? CircularProgressIndicator() : _showInfo()
       ),
     );
   }
 
   _showInfo() {
-    if(_androidInfo['error'] != null) {
+    if(_deviceInfo['error'] != null) {
       return Text('Failed to get information');
     } else {
       return Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
-          Text("osApiLevel: ${_androidInfo['osVersion']}"),
-          Text("totalInternalStorage: ${_androidInfo['totalInternalStorage']}"),
-          Text("freeInternalStorage: ${_androidInfo['freeInternalStorage']}"),
-          Text("mobileNetwork: ${_androidInfo['mobileNetwork']}"),
-          Text("totalRamSize: ${_androidInfo['totalRamSize']}"),
-          Text("freeRamSize: ${_androidInfo['freeRamSize']}"),
-          Text("screenSize: ${_androidInfo['osApiLevel']}"),
-          Text("dateAndTime: ${_androidInfo['dateAndTime']}"),
-          Text("manufacturer: ${_androidInfo['manufacturer']}"),
+          Text("osApiLevel: ${_deviceInfo['osVersion']}"),
+          Text("totalInternalStorage: ${_deviceInfo['totalInternalStorage']}"),
+          Text("freeInternalStorage: ${_deviceInfo['freeInternalStorage']}"),
+          Text("mobileNetwork: ${_deviceInfo['mobileNetwork']}"),
+          Text("totalRamSize: ${_deviceInfo['totalRamSize']}"),
+          Text("freeRamSize: ${_deviceInfo['freeRamSize']}"),
+          Text("screenSize: ${_deviceInfo['screenSize']}"),
+          Text("dateAndTime: ${_deviceInfo['dateAndTime']}"),
+          Text("manufacturer: ${_deviceInfo['manufacturer']}"),
         ],
       );
     }
