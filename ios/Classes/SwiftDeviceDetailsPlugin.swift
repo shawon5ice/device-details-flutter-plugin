@@ -94,6 +94,7 @@ public class SwiftDeviceDetailsPlugin: NSObject, FlutterPlugin {
             iOSDeviceInfo["screenSize"] = SwiftDeviceDetailsPlugin.getDisplaySize()
             iOSDeviceInfo["dateAndTime"] = SwiftDeviceDetailsPlugin.getCurrentDateTime()
             iOSDeviceInfo["manufacturer"] = "apple"
+            iOSDeviceInfo["deviceId"] = UIDevice.current.identifierForVendor?.uuidString
         }
         result(iOSDeviceInfo)
     }

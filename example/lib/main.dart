@@ -50,19 +50,24 @@ class _MyAppState extends State<MyApp> {
     if(_deviceInfo['error'] != null) {
       return Text('Failed to get information');
     } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
-          Text("osApiLevel: ${_deviceInfo['osVersion']}"),
-          Text("totalInternalStorage: ${_deviceInfo['totalInternalStorage']}"),
-          Text("freeInternalStorage: ${_deviceInfo['freeInternalStorage']}"),
-          Text("mobileNetwork: ${_deviceInfo['mobileNetwork']}"),
-          Text("totalRamSize: ${_deviceInfo['totalRamSize']}"),
-          Text("freeRamSize: ${_deviceInfo['freeRamSize']}"),
-          Text("screenSize: ${_deviceInfo['screenSize']}"),
-          Text("dateAndTime: ${_deviceInfo['dateAndTime']}"),
-          Text("manufacturer: ${_deviceInfo['manufacturer']}"),
-        ],
+      return Container(
+        color: Colors.red,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Text("os version: ${_deviceInfo['osVersion']}"),
+            Text("total internal storage: ${_deviceInfo['totalInternalStorage']}"),
+            Text("free internal storage: ${_deviceInfo['freeInternalStorage']}"),
+            Text("mobile operator: ${_deviceInfo['mobileNetwork']}"),
+            Text("total ram size: ${_deviceInfo['totalRamSize']}"),
+            Text("free ram size: ${_deviceInfo['freeRamSize']}"),
+            Text("screen size: ${_deviceInfo['screenSize']}"),
+            Text("current date and time: ${_deviceInfo['dateAndTime']}"),
+            Text("manufacturer: ${_deviceInfo['manufacturer']}"),
+            Text("device id: ${_deviceInfo['deviceId']}"),
+          ],
+        ),
       );
     }
   }

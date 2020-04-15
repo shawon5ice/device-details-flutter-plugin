@@ -9,9 +9,9 @@ import android.graphics.Point;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
+import android.provider.Settings;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 
@@ -81,11 +81,8 @@ public class DeviceDetailsPlugin implements FlutterPlugin, MethodCallHandler, Ac
             androidInfo.put("screenSize", getScreenSizeInches());
             androidInfo.put("dateAndTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime()));
             androidInfo.put("manufacturer", Build.MANUFACTURER);
-            /*androidInfo.put("osVersion", Build.VERSION_CODES.class.getFields()[android.os.Build.VERSION.SDK_INT].getName());
-            androidInfo.put("device", Settings.Secure.getString(context.getContentResolver(),
-                    Settings.Secure.ANDROID_ID));
-            androidInfo.put("modelAndProduct", Build.MODEL + "(" + Build.PRODUCT + ")");*/
-            Log.v("'androidInfo'", androidInfo.toString());
+            androidInfo.put("deviceId", Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
+//            Log.v("'androidInfo'", androidInfo.toString());
             result.success(androidInfo);
         } else {
             result.notImplemented();
