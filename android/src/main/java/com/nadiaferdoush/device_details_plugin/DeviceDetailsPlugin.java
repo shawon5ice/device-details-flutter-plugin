@@ -5,6 +5,9 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Environment;
@@ -48,8 +51,6 @@ public class DeviceDetailsPlugin implements FlutterPlugin, MethodCallHandler, Ac
         channel.setMethodCallHandler(new DeviceDetailsPlugin());
         context = flutterPluginBinding.getApplicationContext();
     }
-
-
     // This static function is optional and equivalent to onAttachedToEngine. It supports the old
     // pre-Flutter-1.12 Android projects. You are encouraged to continue supporting
     // plugin registration via this function while apps migrate to use the new Android APIs
@@ -72,7 +73,12 @@ public class DeviceDetailsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     public void onMethodCall(MethodCall call, Result result) {
         if (call.method.equals("getAndroidInfo")) {
             Map<String, Object> androidInfo = new HashMap<>();
-            androidInfo.put("osVersion", Build.VERSION.SDK_INT);
+            androidInfo.put("appName", getApplicationName());
+            androidInfo.put("packageName", context.getPackageName());
+            androidInfo.put("version", getVersion());
+            androidInfo.put("buildNumber", getBuildNumber());
+            androidInfo.put("flutterAppVersion", getFlutterAppVersion());
+            androidInfo.put("osVersion", String.valueOf(Build.VERSION.SDK_INT));
             androidInfo.put("totalInternalStorage", getInternalMemoryInfo("totalInternal"));
             androidInfo.put("freeInternalStorage", getInternalMemoryInfo("freeInternal"));
             androidInfo.put("mobileNetwork", getMobileNetwork());
@@ -82,11 +88,56 @@ public class DeviceDetailsPlugin implements FlutterPlugin, MethodCallHandler, Ac
             androidInfo.put("dateAndTime", new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(Calendar.getInstance().getTime()));
             androidInfo.put("manufacturer", Build.MANUFACTURER);
             androidInfo.put("deviceId", Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID));
-//            Log.v("'androidInfo'", androidInfo.toString());
             result.success(androidInfo);
         } else {
             result.notImplemented();
         }
+    }
+
+    @TargetApi(Build.VERSION_CODES.P)
+    private static String getVersion() {
+        String versionName = "";
+        PackageManager manager = context.getPackageManager();
+        try {
+            PackageInfo info = manager.getPackageInfo(context.getPackageName(), 0);
+            versionName = info.versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return versionName;
+    }
+
+    private static String getBuildNumber() {
+        String buildNumber = "";
+        PackageManager packageManager = context.getPackageManager();
+        try {
+            PackageInfo packageInfo = packageManager.getPackageInfo(context.getPackageName(), 0);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                buildNumber = String.valueOf(packageInfo.getLongVersionCode());
+            } else
+                buildNumber = String.valueOf(packageInfo.versionCode);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return buildNumber;
+    }
+
+    private static String getFlutterAppVersion() {
+        String flutterAppVersion = "";
+        String versionName = getVersion();
+        String buildNumber = getBuildNumber();
+        if (buildNumber.equals("")) {
+            flutterAppVersion = versionName;
+        } else
+            flutterAppVersion = versionName + "+" + buildNumber;
+        return flutterAppVersion;
+    }
+
+    @TargetApi(Build.VERSION_CODES.DONUT)
+    private static String getApplicationName() {
+        ApplicationInfo applicationInfo = context.getApplicationInfo();
+        int stringId = applicationInfo.labelRes;
+        return stringId == 0 ? applicationInfo.nonLocalizedLabel.toString() : context.getString(stringId);
     }
 
     @SuppressLint("DefaultLocale")

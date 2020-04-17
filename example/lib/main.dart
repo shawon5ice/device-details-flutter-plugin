@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:device_details_plugin/device_details_plugin.dart';
@@ -12,7 +10,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  var _deviceInfo = {};
+  DeviceDetailsPlugin _deviceDetails = DeviceDetailsPlugin();
 
   @override
   void initState() {
@@ -22,15 +20,10 @@ class _MyAppState extends State<MyApp> {
 
   // Platform messages are asynchronous, so we initialize in an async method.
   Future<void> getDeviceInfo() async {
-    var deviceInfo = Platform.isIOS ? await DeviceDetailsPlugin().getiOSInfo():
-    await DeviceDetailsPlugin().getAndroidInfo();
-    print(deviceInfo);
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
-    if (!mounted) return;
+    final DeviceDetailsPlugin details = await DeviceDetailsPlugin().getDeviceInfo();
+    print(details);
     setState(() {
-      _deviceInfo = deviceInfo;
+      _deviceDetails = details;
     });
   }
 
@@ -38,37 +31,40 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: _deviceInfo.isEmpty ? CircularProgressIndicator() : _showInfo()
+          appBar: AppBar(
+            title: const Text('Plugin example app'),
+          ),
+          body: _deviceDetails == null
+              ? CircularProgressIndicator()
+              : _showInfo()
       ),
     );
   }
 
   _showInfo() {
-    if(_deviceInfo['error'] != null) {
-      return Text('Failed to get information');
-    } else {
-      return Container(
-        color: Colors.red,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Text("os version: ${_deviceInfo['osVersion']}"),
-            Text("total internal storage: ${_deviceInfo['totalInternalStorage']}"),
-            Text("free internal storage: ${_deviceInfo['freeInternalStorage']}"),
-            Text("mobile operator: ${_deviceInfo['mobileNetwork']}"),
-            Text("total ram size: ${_deviceInfo['totalRamSize']}"),
-            Text("free ram size: ${_deviceInfo['freeRamSize']}"),
-            Text("screen size: ${_deviceInfo['screenSize']}"),
-            Text("current date and time: ${_deviceInfo['dateAndTime']}"),
-            Text("manufacturer: ${_deviceInfo['manufacturer']}"),
-            Text("device id: ${_deviceInfo['deviceId']}"),
-          ],
-        ),
-      );
-    }
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text("app name: ${_deviceDetails.appName}"),
+          Text("package name: ${_deviceDetails.packageName}"),
+          Text("version name: ${_deviceDetails.version}"),
+          Text("build: ${_deviceDetails.buildNumber}"),
+          Text("flutter app version: ${_deviceDetails.flutterAppVersion}"),
+          Text("os version: ${_deviceDetails.osVersion}"),
+          Text("total internal storage: ${_deviceDetails.totalInternalStorage}"),
+          Text("free internal storage: ${_deviceDetails.freeInternalStorage}"),
+          Text("mobile operator: ${_deviceDetails.networkOperator}"),
+          Text("total ram size: ${_deviceDetails.totalRAMSize}"),
+          Text("free ram size: ${_deviceDetails.freeRAMSize}"),
+          Text("screen size: ${_deviceDetails.screenSizeInInches}"),
+          Text("current date and time: ${_deviceDetails.currentDateTime}"),
+          Text("manufacturer: ${_deviceDetails.manufacturer}"),
+          Text("device id: ${_deviceDetails.deviceId}"),
+        ],
+      ),
+    );
   }
 }
