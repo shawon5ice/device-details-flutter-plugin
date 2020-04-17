@@ -8,12 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f5514d35-a473-48d5-a942-576c7a8eefb6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/com/nadiaferdoush/device_details_plugin/DeviceDetailsPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/com/nadiaferdoush/device_details_plugin/DeviceDetailsPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftDeviceDetailsPlugin.swift" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Classes/SwiftDeviceDetailsPlugin.swift" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/device_details_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/device_details_plugin.dart" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +88,14 @@
       <option name="project" value="LOCAL" />
       <updated>1586952600872</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="added appName, packageName, versionName, buildNumber, and flutterAppVersion">
+      <created>1587121199544</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1587121199544</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -113,6 +115,7 @@
     <MESSAGE value="configurations added for iOS support" />
     <MESSAGE value="finished iOS part" />
     <MESSAGE value="added device id" />
-    <option name="LAST_COMMIT_MESSAGE" value="added device id" />
+    <MESSAGE value="added appName, packageName, versionName, buildNumber, and flutterAppVersion" />
+    <option name="LAST_COMMIT_MESSAGE" value="added appName, packageName, versionName, buildNumber, and flutterAppVersion" />
   </component>
 </project>

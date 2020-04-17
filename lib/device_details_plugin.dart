@@ -61,7 +61,7 @@ class DeviceDetailsPlugin {
 
   static DeviceDetailsPlugin _deviceDetailsPlugin;
 
-  Future<DeviceDetailsPlugin> getDeviceInfo() async {
+  static Future<DeviceDetailsPlugin> getDeviceInfo() async {
     try {
       final Map<dynamic, dynamic> map = Platform.isIOS ?
       await _channel.invokeMethod("getiOSInfo") :

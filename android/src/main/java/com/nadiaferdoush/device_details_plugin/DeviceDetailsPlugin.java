@@ -123,7 +123,7 @@ public class DeviceDetailsPlugin implements FlutterPlugin, MethodCallHandler, Ac
     }
 
     private static String getFlutterAppVersion() {
-        String flutterAppVersion = "";
+        String flutterAppVersion;
         String versionName = getVersion();
         String buildNumber = getBuildNumber();
         if (buildNumber.equals("")) {
