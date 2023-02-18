@@ -42,26 +42,26 @@ class DeviceDetailsPlugin {
   final String currentDateTime;
 
   DeviceDetailsPlugin({
-    this.appName,
-    this.packageName,
-    this.version,
-    this.buildNumber,
-    this.flutterAppVersion,
-    this.osVersion,
-    this.totalInternalStorage,
-    this.freeInternalStorage,
-    this.networkOperator,
-    this.totalRAMSize,
-    this.freeRAMSize,
-    this.screenSizeInInches,
-    this.manufacturer,
-    this.deviceId,
-    this.currentDateTime
+    required this.appName,
+    required this.packageName,
+    required this.version,
+    required this.buildNumber,
+    required this.flutterAppVersion,
+    required this.osVersion,
+    required this.totalInternalStorage,
+    required this.freeInternalStorage,
+    required this.networkOperator,
+    required this.totalRAMSize,
+    required this.freeRAMSize,
+    required this.screenSizeInInches,
+    required this.manufacturer,
+    required this.deviceId,
+    required this.currentDateTime
   });
 
-  static DeviceDetailsPlugin _deviceDetailsPlugin;
+  static DeviceDetailsPlugin? _deviceDetailsPlugin;
 
-  static Future<DeviceDetailsPlugin> getDeviceInfo() async {
+  static Future<DeviceDetailsPlugin?> getDeviceInfo() async {
     try {
       final Map<dynamic, dynamic> map = Platform.isIOS ?
       await _channel.invokeMethod("getiOSInfo") :
@@ -83,7 +83,7 @@ class DeviceDetailsPlugin {
         deviceId: map['deviceId'],
         currentDateTime: map['dateAndTime']
       );
-      print(_deviceDetailsPlugin.deviceId);
+      print(_deviceDetailsPlugin?.deviceId);
     } on PlatformException catch (e) {
       print('DeviceDetailsPlugin error: ${true}, code: ${e.code}, message: ${e.message}');
     }
