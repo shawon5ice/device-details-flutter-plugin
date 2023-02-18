@@ -9,16 +9,11 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5514d35-a473-48d5-a942-576c7a8eefb6" name="Default Changelist" comment="added appName, packageName, versionName, buildNumber, and flutterAppVersion">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
+    <list default="true" id="f5514d35-a473-48d5-a942-576c7a8eefb6" name="Default Changelist" comment="upgraded plugin for null safety compatibility.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/device_details_plugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/device_details_plugin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/device_details_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/device_details_plugin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +97,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587121199544</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="upgraded plugin for null safety compatibility.">
+      <created>1676701110939</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1676701110939</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,6 +124,7 @@
     <MESSAGE value="finished iOS part" />
     <MESSAGE value="added device id" />
     <MESSAGE value="added appName, packageName, versionName, buildNumber, and flutterAppVersion" />
-    <option name="LAST_COMMIT_MESSAGE" value="added appName, packageName, versionName, buildNumber, and flutterAppVersion" />
+    <MESSAGE value="upgraded plugin for null safety compatibility." />
+    <option name="LAST_COMMIT_MESSAGE" value="upgraded plugin for null safety compatibility." />
   </component>
 </project>

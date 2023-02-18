@@ -8,55 +8,55 @@ const MethodChannel _channel = const MethodChannel('device_details_plugin');
 
 class DeviceDetailsPlugin {
   /// The app name. `CFBundleDisplayName` on iOS, `application/label` on Android.
-  final String appName;
+  final String? appName;
 
   /// The package name. `bundleIdentifier` on iOS, `getPackageName` on Android.
-  final String packageName;
+  final String? packageName;
 
   /// The package version. `CFBundleShortVersionString` on iOS, `versionName` on Android.
-  final String version;
+  final String? version;
 
   /// The build number. `CFBundleVersion` on iOS, `versionCode` on Android.
-  final String buildNumber;
+  final String? buildNumber;
 
-  final String flutterAppVersion;
+  final String? flutterAppVersion;
 
-  final String osVersion;
+  final String? osVersion;
 
-  final String totalInternalStorage;
+  final String? totalInternalStorage;
 
-  final String freeInternalStorage;
+  final String? freeInternalStorage;
 
-  final String networkOperator;
+  final String? networkOperator;
 
-  final String totalRAMSize;
+  final String? totalRAMSize;
 
-  final String freeRAMSize;
+  final String? freeRAMSize;
 
-  final String screenSizeInInches;
+  final String? screenSizeInInches;
 
-  final String manufacturer;
+  final String? manufacturer;
 
-  final String deviceId;
+  final String? deviceId;
 
-  final String currentDateTime;
+  final String? currentDateTime;
 
   DeviceDetailsPlugin({
-    required this.appName,
-    required this.packageName,
-    required this.version,
-    required this.buildNumber,
-    required this.flutterAppVersion,
-    required this.osVersion,
-    required this.totalInternalStorage,
-    required this.freeInternalStorage,
-    required this.networkOperator,
-    required this.totalRAMSize,
-    required this.freeRAMSize,
-    required this.screenSizeInInches,
-    required this.manufacturer,
-    required this.deviceId,
-    required this.currentDateTime
+    this.appName,
+    this.packageName,
+    this.version,
+    this.buildNumber,
+    this.flutterAppVersion,
+    this.osVersion,
+    this.totalInternalStorage,
+    this.freeInternalStorage,
+    this.networkOperator,
+    this.totalRAMSize,
+    this.freeRAMSize,
+    this.screenSizeInInches,
+    this.manufacturer,
+    this.deviceId,
+    this.currentDateTime
   });
 
   static DeviceDetailsPlugin? _deviceDetailsPlugin;
